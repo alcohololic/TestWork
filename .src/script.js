@@ -1,6 +1,6 @@
 const URL = "http://localhost:3000/students";
 
-window.onload = loadStudent;
+window.onload = loadStudent();
 
 function renderStudents(studentsList) {
     let templateEl = document.getElementById('studentList');
@@ -23,3 +23,19 @@ function loadStudent() {
         .then(r => r.json())
         .then(renderStudents);
 }
+
+function createStudent() {
+
+    let sName = document.getElementById("studentName").value;
+    let sLevel = document.getElementById("studentLevel").value;
+    console.log(sName,sLevel);
+    fetch(URL, {
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            method: 'post',
+            body: JSON.stringify({name : sName, level : sLevel})
+        }
+        )
+    }
