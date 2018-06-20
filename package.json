@@ -1,0 +1,10 @@
+{
+  "name": "TestWork",
+  "version": "0.0.1",
+  "dependencies": {
+    
+  },
+  "scripts": {
+    "start": "json-server --watch db.json"
+  }
+}

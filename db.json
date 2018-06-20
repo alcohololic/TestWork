@@ -1,0 +1,13 @@
+{
+  "students" : [{
+    "name" : "Alex",
+    "level" : "10"
+    },{
+      "name" : "Mary",
+      "level" : "20"
+    },
+    {
+      "name" : "Fred",
+      "level" : "50"
+    }]
+}
