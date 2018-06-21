@@ -1,6 +1,25 @@
 const URL = "http://localhost:3000/students";
 
-window.onload = loadStudent();
+function init() {
+    let form = document.getElementById("form");
+    loadStudent();
+    form.addEventListener("submit",function(event) {
+        event.preventDefault();
+        createStudent()
+            .then(appendStudent);
+    })
+}
+
+function appendStudent(student) {
+    let templateEl = document.getElementById('studentList');
+    let studentElement = templateEl.content.querySelector(".student");
+    let studentList = document.getElementById('students');
+    let studentClone =  studentElement.cloneNode(true);
+    updateStudentElement(studentClone, student);
+    studentList.appendChild(studentClone);
+}
+
+window.onload = init;
 
 function renderStudents(studentsList) {
     let templateEl = document.getElementById('studentList');
@@ -25,11 +44,10 @@ function loadStudent() {
 }
 
 function createStudent() {
-
     let sName = document.getElementById("studentName").value;
     let sLevel = document.getElementById("studentLevel").value;
     console.log(sName,sLevel);
-    fetch(URL, {
+    return fetch(URL, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
@@ -37,5 +55,5 @@ function createStudent() {
             method: 'post',
             body: JSON.stringify({name : sName, level : sLevel})
         }
-        )
+        ).then(r => r.json());
     }
